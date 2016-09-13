@@ -29,7 +29,8 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract("style-loader", "css!autoprefixer!sass")
-      }
+      },
+      { test: /\.json$/, loader: 'json-loader' }
     ]
   },
   plugins: [
@@ -50,5 +51,11 @@ module.exports = {
         warnings: false
       }
     })
-  ]
+  ],
+  node: {
+    console: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  }
 };

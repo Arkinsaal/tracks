@@ -37,7 +37,8 @@ module.exports = {
         test: /\.scss$/,
         //loader: "style!css!autoprefixer!sass"
         loader: ExtractTextPlugin.extract("style-loader", "css!autoprefixer!sass")
-      }
+      },
+      { test: /\.json$/, loader: 'json-loader' }
     ]
   },
   plugins: [
@@ -47,5 +48,11 @@ module.exports = {
       title: 'React start'
     }), 
     new ExtractTextPlugin("[name].css")
-  ]
+  ],
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  }
 };

@@ -1,0 +1,72 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+#main {
+  height: 100%;
+}
+
+.Main {
+  height: 100%;
+}
+
+.newEventCreation {
+  height: 100px;
+}
+
+.slidePane {
+  width: 100%;
+  > .slidePane--Slider {
+    transition: transform 0.2s ease-in-out;
+    transform: translateX(-50%);
+    width: 200%;
+    > div {
+      vertical-align: top;
+      width: 50%;
+      display: inline-block;
+    }
+  }
+}
+
+.slidePaneLeft > .slidePane--Slider {
+  transform: translateX(0%);
+}
+.slidePaneRight > .slidePane--Slider {
+  transform: translateX(-50%);
+}
+
+.previouslyUsedTags {
+  height: calc(100% - 100px);
+  > div > div {
+    height: 100%;
+  }
+  .singles {
+    background-color: red;
+  }
+  .combos {
+    background-color: blue;
+  }
+}
+
+.tagList {
+  color: white;
+  padding: 5px;
+  width: 100%;
+  min-height: 50px;
+  font-family: arial;
+  font-size: 12px;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(255,255,255,0.4)
+}
+
+.currentTags {
+  width: 100%;
+  > div {
+    display: inline-block;
+    border: 1px solid grey;
+    padding: 0 5px;
+    margin: 0 5px;
+  }
+}
