@@ -39,7 +39,7 @@ export default class Main extends React.Component {
   _postEvent() {
     const { current, tags } = this.state;
 
-    fetch('http://localhost:4000/event', {
+    fetch('/event', {
       method: 'POST',
       headers: headers,
       body: JSON.stringify({
@@ -62,7 +62,7 @@ export default class Main extends React.Component {
   }
 
   _getTags() {
-    fetch('http://localhost:4000/tags', {
+    fetch('/tags', {
       method: 'GET',
       headers: headers
     })
