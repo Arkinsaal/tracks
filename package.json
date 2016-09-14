@@ -47,10 +47,10 @@
     "webpack-stream": "^3.1.0"
   },
   "scripts": {
-    "start": "gulp webpack-dev-server",
+    "watch": "gulp webpack-dev-server",
     "build": "gulp webpack",
     "test": "karma start",
-    "server": "node server"
+    "start": "node server"
   },
   "author": "Net Engine",
   "license": "MIT"

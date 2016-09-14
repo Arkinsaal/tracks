@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 4000;
 
 const EventsDatabase = new Events();
 
-app.use(express.static('public'));
 app.use('/', express.static(__dirname + '/dist/index.html'));
 
 router.use(bodyParser.json());
