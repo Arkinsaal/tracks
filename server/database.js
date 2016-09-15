@@ -43,7 +43,10 @@ module.exports = class Events {
 
   getTags(callback) {
     this.getCollection('events', collection => {
-      collection.find().toArray(callback);
+      //collection.find().toArray(callback);
+      collection.aggregate([
+        { "$group": { "_id": "$tags", "count": { $sum: 1 } } }
+      ], callback);
     });
   }
 }

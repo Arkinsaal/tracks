@@ -9,8 +9,7 @@ const headers = {
   'Content-Type': 'application/json'
 };
 
-//const baseUrl = 'http://localhost:4000';
-const baseUrl = 'https://tracks23.herokuapp.com';
+const baseUrl = window.location.hostname == 'localhost' ? 'http://localhost:4000' : 'https://tracks23.herokuapp.com';
 
 const indexOfDeep = (array, check) => {
   const checkString = check.toString();
@@ -111,6 +110,10 @@ export default class Main extends React.Component {
   _togglePane(pane) {
     this.setState({
       pane: pane
+    }, () => {
+      if (this.state.pane == 'Right') {
+        setTimeout(() => {this.refs.tagInput.focus(); }, 250);
+      }
     });
   }
 
@@ -129,7 +132,7 @@ export default class Main extends React.Component {
               )
             }) }
           </div>
-          <input className="sendEvent" type="button" onClick={ this._postEvent } />
+          <input className="sendEvent" type="button" onClick={ this._postEvent } value="Add" />
         </div>
         <div className={ `previouslyUsedTags slidePane slidePane${ pane }` }>
           <div className="slidePaneTabs">

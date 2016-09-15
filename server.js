@@ -22,26 +22,18 @@ router.use(function(req, res, next) {
   next();
 });
 
-function indexOfDeep(array, check) {
-  const checkString = check.toString();
-  for (let i = 0; i < array.length; i++) {
-    if (array[i].toString() == checkString) return i;
-  }
-  return -1;
-}
-
 function sortTags(events) {
 
-  let addToList = function(list, tags) {
-    if (indexOfDeep(list, tags) == -1) list.push(tags);
-  };
   return events.reduce((prev, curr, i) => {
-    if (!curr.tags) return;
-    let tagList = curr.tags.sort((a, b) => a < b ? -1 : 1);
-    if (tagList.length == 0) return prev;
+    if (!curr._id) return;
+    let tagList = {
+      tags: curr._id.sort((a, b) => a < b ? -1 : 1),
+      count: curr.count
+    }
+    if (tagList.tags.length == 0) return prev;
 
-    let list = (tagList.length > 1) ? 'combos' : 'singles';
-    addToList(prev[list], tagList);
+    let list = (tagList.tags.length > 1) ? 'combos' : 'singles';
+    prev[list].push(tagList);
 
     return prev;
   }, { singles: [], combos: [] });
