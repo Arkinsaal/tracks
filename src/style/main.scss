@@ -2,6 +2,7 @@ html, body {
   margin: 0;
   height: 100%;
   overflow: hidden;
+  font-family: arial;
 }
 
 #main {
@@ -14,27 +15,78 @@ html, body {
 
 .newEventCreation {
   height: 100px;
+  > * {
+    display:inline-block;
+    box-sizing: border-box;
+    vertical-align: top;
+  }
+  .currentTags {
+    width: calc(100% - 100px);
+    height: 100%;
+    overflow-y: scroll;
+  }
+  .sendEvent {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    border: none;
+    border-left: 1px solid black;
+  }
+}
+
+.slidePaneTabs {
+  height: 40px;
+  line-height: 40px;
+  font-weight: 600;
+  > div {
+    display: inline-block;
+    width: 33.333%;
+    text-align: center;
+  }
 }
 
 .slidePane {
   width: 100%;
+  > .slidePaneTabs > div {
+    opacity: 0.4;
+  }
   > .slidePane--Slider {
     transition: transform 0.2s ease-in-out;
-    transform: translateX(-50%);
-    width: 200%;
+    transform: translateX(-33.333%);
+    width: 300%;
+    height: calc(100% - 40px);
     > div {
       vertical-align: top;
-      width: 50%;
+      width: 33.333%;
       display: inline-block;
+      overflow-y: scroll;
     }
   }
 }
 
-.slidePaneLeft > .slidePane--Slider {
-  transform: translateX(0%);
+.slidePaneLeft {
+  > .slidePaneTabs > div:first-child {
+    opacity: 1;
+  }
+  > .slidePane--Slider {
+    transform: translateX(0%);
+  }
 }
-.slidePaneRight > .slidePane--Slider {
-  transform: translateX(-50%);
+.slidePaneMiddle {
+  > .slidePaneTabs > div:nth-child(2) {
+    opacity: 1;
+  }
+  > .slidePane--Slider {
+    transform: translateX(-33.333%);
+  }
+}
+.slidePaneRight {
+  > .slidePaneTabs > div:last-child {
+    opacity: 1;
+  }
+  > .slidePane--Slider {
+    transform: translateX(-66.666%);
+  }
 }
 
 .previouslyUsedTags {
@@ -48,17 +100,33 @@ html, body {
   .combos {
     background-color: blue;
   }
+  .new {
+    background-color: green;
+  }
+}
+
+.new > input {
+  width: calc(100% - 20px);
+  height: 40px;
+  line-height: 40px;
+  margin: 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid white;
+  color: white;
+  outline: 0;
+  padding-left: 10px;
+  box-sizing: border-box;
+  font-size: 18px;
 }
 
 .tagList {
   color: white;
-  padding: 5px;
+  padding: 10px 20px;
   width: 100%;
-  min-height: 50px;
-  font-family: arial;
   font-size: 12px;
   box-sizing: border-box;
-  border-bottom: 1px solid rgba(255,255,255,0.4)
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .currentTags {
@@ -66,7 +134,9 @@ html, body {
   > div {
     display: inline-block;
     border: 1px solid grey;
-    padding: 0 5px;
-    margin: 0 5px;
+    padding: 0 10px;
+    margin: 5px;
+    min-height: 40px;
+    line-height: 40px;
   }
 }

@@ -9,6 +9,9 @@ const headers = {
   'Content-Type': 'application/json'
 };
 
+//const baseUrl = 'http://localhost:4000';
+const baseUrl = 'https://tracks23.herokuapp.com';
+
 const indexOfDeep = (array, check) => {
   const checkString = check.toString();
   for (let i = 0; i < array.length; i++) {
@@ -27,7 +30,8 @@ export default class Main extends React.Component {
       tags: {
         singles: [],
         combos: []
-      }
+      },
+      pane: 'Middle'
     };
 
     this._postEvent  = this._postEvent.bind(this);
@@ -39,7 +43,7 @@ export default class Main extends React.Component {
   _postEvent() {
     const { current, tags } = this.state;
 
-    fetch('/event', {
+    fetch(`${baseUrl}/event`, {
       method: 'POST',
       headers: headers,
       body: JSON.stringify({
@@ -62,7 +66,7 @@ export default class Main extends React.Component {
   }
 
   _getTags() {
-    fetch('/tags', {
+    fetch(`${baseUrl}/tags`, {
       method: 'GET',
       headers: headers
     })
@@ -119,20 +123,19 @@ export default class Main extends React.Component {
           <div className="currentTags">
             { current.map((tag, i) => {
               return (
-                <div key={ `${i}-${tag}` }>
+                <div key={ `${i}-${tag}` } onClick={ this._removeTag.bind(this, tag) }>
                   { tag }
-                  <span onClick={ this._removeTag.bind(this, tag) }>X</span>
                 </div>
               )
             }) }
           </div>
-          <input type="text" ref="tagInput" onKeyPress={ this._onKeyPress } />
-          <input type="button" onClick={ this._postEvent } />
+          <input className="sendEvent" type="button" onClick={ this._postEvent } />
         </div>
         <div className={ `previouslyUsedTags slidePane slidePane${ pane }` }>
           <div className="slidePaneTabs">
             <div onClick={ this._togglePane.bind(this, 'Left') }>Singles</div>
-            <div onClick={ this._togglePane.bind(this, 'Right') }>Combos</div>
+            <div onClick={ this._togglePane.bind(this, 'Middle') }>Combos</div>
+            <div onClick={ this._togglePane.bind(this, 'Right') }>New</div>
           </div>
           <div className="slidePane--Slider">
             <div className="singles">
@@ -152,6 +155,9 @@ export default class Main extends React.Component {
                   </div>
                 )
               }) }
+            </div>
+            <div className="new">
+              <input className="newTagInput" type="text" ref="tagInput" onKeyPress={ this._onKeyPress } />
             </div>
           </div>
         </div>
