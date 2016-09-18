@@ -24,7 +24,7 @@ router.use(function(req, res, next) {
 
 function sortTags(events) {
 
-  return events.reduce((prev, curr, i) => {
+  let tags = events.reduce((prev, curr, i) => {
     if (!curr._id) return;
     let tagList = {
       tags: curr._id.sort((a, b) => a < b ? -1 : 1),
@@ -37,6 +37,11 @@ function sortTags(events) {
 
     return prev;
   }, { singles: [], combos: [] });
+
+  return {
+    singles: tags.singles.sort((a, b) => b.count - a.count),
+    combos: tags.combos.sort((a, b) => b.count - a.count)
+  }
 }
 
 router.route('/event')

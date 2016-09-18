@@ -52,10 +52,11 @@ export default class Main extends React.Component {
     })
     .then(response => {
       if (current.length > 1) {
-        if (indexOfDeep(tags.combos, current) == -1) tags.combos.push(current);
+        if (indexOfDeep(tags.combos, current) == -1) tags.combos.push({tags: current});
       } else {
-        if (indexOfDeep(tags.singles, current) == -1) tags.singles.push(current);
+        if (indexOfDeep(tags.singles, current) == -1) tags.singles.push({tags: current});
       }
+      console.log(tags);
       this.setState({
         tags: tags,
         value: '',
@@ -120,6 +121,8 @@ export default class Main extends React.Component {
   render() {
     const { value, tags, current, pane } = this.state;
 
+    const invalidTags = ['start', 'stop'];
+
     return (
       <div className="Main">
         <div className="newEventCreation">
@@ -132,7 +135,12 @@ export default class Main extends React.Component {
               )
             }) }
           </div>
-          <input className="sendEvent" type="button" onClick={ this._postEvent } value="Add" />
+          <div className="sendEvent" type="button" onClick={ this._postEvent } value="Add">
+            <i className="fa fa-paw"></i>
+            <i className="fa fa-paw"></i>
+            <i className="fa fa-paw"></i>
+            <i className="fa fa-paw"></i>
+          </div>
         </div>
         <div className={ `previouslyUsedTags slidePane slidePane${ pane }` }>
           <div className="slidePaneTabs">
@@ -142,19 +150,24 @@ export default class Main extends React.Component {
           </div>
           <div className="slidePane--Slider">
             <div className="singles">
-              { tags.singles.map((tags, i) => {
+              { tags.singles.map((item, i) => {
                 return (
-                  <div key={ i } className="tagList" onClick={ this._addTags.bind(this, tags, null) }>
-                    { tags.map((tag, i) => <div key={ `${i}-${tag}` }>{ tag }</div>) }
+                  <div key={ i } className="tagList" onClick={ this._addTags.bind(this, item.tags, null) }>
+                    { item.tags.map((tag, i) => <div key={ `${i}-${tag}` }>{ tag }</div>) }
                   </div>
                 )
               }) }
             </div>
             <div className="combos">
-              { tags.combos.map((tags, i) => {
+              { tags.combos.map((item, i) => {
+                const validTag = (invalidTags.indexOf(item.tags) == -1) ? null : item.tags;
                 return (
-                  <div key={ i } className="tagList" onClick={ this._addTags.bind(this, tags, null) }>
-                    { tags.map((tag, i) => <div key={ `${i}-${tag}` }>{ tag }</div>) }
+                  <div key={ i } className="tagList" onClick={ this._addTags.bind(this, item.tags, null) }>
+                    <div className="tagList--list">
+                      { item.tags.map((tag, i) => (invalidTags.indexOf(tag.toLowerCase()) == -1) ? <div key={ `${i}-${tag}` }>{ tag }</div> : null) }
+                    </div>
+                    { item.tags.indexOf('Start') >= 0 ? <div className="tagList--button"><i className="fa fa-play"></i></div> : null }
+                    { item.tags.indexOf('Stop') >= 0 ? <div className="tagList--button"><i className="fa fa-stop"></i></div> : null }
                   </div>
                 )
               }) }

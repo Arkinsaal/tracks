@@ -5,6 +5,10 @@ html, body {
   font-family: arial;
 }
 
+body {
+  background: linear-gradient(#1A237E, #3949AB);
+}
+
 #main {
   height: 100%;
 }
@@ -26,11 +30,39 @@ html, body {
     overflow-y: scroll;
   }
   .sendEvent {
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
+    margin: 10px;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    background-color: #D81B60;
     border: none;
-    border-left: 1px solid black;
+    border-radius: 50%;
+    color: white;
+    position: relative;
+    > i {
+      position: absolute;
+      font-size: 12px;
+      &:nth-child(1) {
+        top: 16px;
+        left: calc(50% - 15px);
+        transform: rotate(-10deg);
+      }
+      &:nth-child(2) {
+        top: 26px;
+        left: calc(50% + 2px);
+        transform: rotate(10deg);
+      }
+      &:nth-child(3) {
+        top: 44px;
+        left: calc(50% - 15px);
+        transform: rotate(-10deg);
+      }
+      &:nth-child(4) {
+        top: 54px;
+        left: calc(50% + 2px);
+        transform: rotate(10deg);
+      }
+    }
   }
 }
 
@@ -48,6 +80,7 @@ html, body {
 .slidePane {
   width: 100%;
   > .slidePaneTabs > div {
+    color: white;
     opacity: 0.4;
   }
   > .slidePane--Slider {
@@ -94,15 +127,6 @@ html, body {
   > div > div {
     height: 100%;
   }
-  .singles {
-    background-color: red;
-  }
-  .combos {
-    background-color: blue;
-  }
-  .new {
-    background-color: green;
-  }
 }
 
 .new > input {
@@ -127,16 +151,29 @@ html, body {
   font-size: 12px;
   box-sizing: border-box;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  flex-direction: row;
+}
+
+.tagList--list {
+  width: calc(100% - 100px);
+}
+
+.tagList--button {
+  width: 100px;
 }
 
 .currentTags {
   width: 100%;
   > div {
     display: inline-block;
-    border: 1px solid grey;
+    color: white;
+    background-color: #D81B60;
     padding: 0 10px;
     margin: 5px;
-    min-height: 40px;
-    line-height: 40px;
+    min-height: 30px;
+    line-height: 30px;
+    border-radius: 4px;
+    font-size: 12px;
   }
 }
