@@ -56,7 +56,6 @@ export default class Main extends React.Component {
       } else {
         if (indexOfDeep(tags.singles, current) == -1) tags.singles.push({tags: current});
       }
-      console.log(tags);
       this.setState({
         tags: tags,
         value: '',
